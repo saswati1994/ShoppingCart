@@ -14,6 +14,7 @@ public class RestaurantsearchserviceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RestaurantsearchserviceApplication.class, args);
+		System.out.println("RestaurantsearchserviceApplication started");
 	}
 
 	
