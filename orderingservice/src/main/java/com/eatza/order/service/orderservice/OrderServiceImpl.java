@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
+import com.eatza.order.client.RestaurantServiceClient;
 import com.eatza.order.dto.ItemFetchDto;
 import com.eatza.order.dto.OrderRequestDto;
 import com.eatza.order.dto.OrderUpdateDto;
@@ -38,11 +39,15 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	ItemService itemService;
 
-	@Value("${restaurant.search.item.url}")
-	private String restaurantServiceItemUrl;
-
-	@Autowired
-	RestTemplate restTemplate;
+	/*
+	 * @Value("${restaurant.search.item.url}") private String
+	 * restaurantServiceItemUrl;
+	 * 
+	 * @Autowired RestTemplate restTemplate;
+	 */
+	
+	@Autowired(required = false)
+	RestaurantServiceClient client;
 
 	private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
@@ -56,15 +61,18 @@ public class OrderServiceImpl implements OrderService {
 		logger.debug("Getting all ordered items to persist");
 		List<OrderedItemsDto> itemsDtoList = orderRequest.getItems();
 		for(OrderedItemsDto itemDto: itemsDtoList) {
-			MappingJackson2HttpMessageConverter map = new MappingJackson2HttpMessageConverter();
-			List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-			messageConverters.add(map);
-			messageConverters.add(new FormHttpMessageConverter());
-			restTemplate.setMessageConverters(messageConverters);
+			/*
+			 * MappingJackson2HttpMessageConverter map = new
+			 * MappingJackson2HttpMessageConverter(); List<HttpMessageConverter<?>>
+			 * messageConverters = new ArrayList<HttpMessageConverter<?>>();
+			 * messageConverters.add(map); messageConverters.add(new
+			 * FormHttpMessageConverter());
+			 * restTemplate.setMessageConverters(messageConverters);
+			 */
 			try {
 				logger.debug("Calling restaurant search service to get item details");
-				ItemFetchDto item = restTemplate.getForObject(restaurantServiceItemUrl+itemDto.getItemId(), ItemFetchDto.class);
-
+				//ItemFetchDto item = restTemplate.getForObject(restaurantServiceItemUrl+itemDto.getItemId(), ItemFetchDto.class);
+				ItemFetchDto item =  client.getMenuItemById(itemDto.getItemId());
 				if(item==null ) {
 
 					orderRepository.delete(order);
@@ -155,13 +163,17 @@ public class OrderServiceImpl implements OrderService {
 		List<OrderedItemsDto> itemsDtoList = orderUpdateRequest.getItems();
 		List<OrderedItem> updateItemsListToReturn = new ArrayList<>();
 		for(OrderedItemsDto itemDto: itemsDtoList) {
-			MappingJackson2HttpMessageConverter map = new MappingJackson2HttpMessageConverter();
-			List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-			messageConverters.add(map);
-			messageConverters.add(new FormHttpMessageConverter());
-			restTemplate.setMessageConverters(messageConverters);
+			/*
+			 * MappingJackson2HttpMessageConverter map = new
+			 * MappingJackson2HttpMessageConverter(); List<HttpMessageConverter<?>>
+			 * messageConverters = new ArrayList<HttpMessageConverter<?>>();
+			 * messageConverters.add(map); messageConverters.add(new
+			 * FormHttpMessageConverter());
+			 * restTemplate.setMessageConverters(messageConverters);
+			 */
 			try {
-				ItemFetchDto item = restTemplate.getForObject(restaurantServiceItemUrl+itemDto.getItemId(), ItemFetchDto.class);
+				//ItemFetchDto item = restTemplate.getForObject(restaurantServiceItemUrl+itemDto.getItemId(), ItemFetchDto.class);
+				ItemFetchDto item = client.getMenuItemById(itemDto.getItemId());
 				if(item==null ) {
 					// deleting previously updated items 
 					for(OrderedItem itemsUpdateToBeReverted: updateItemsListToReturn) {
@@ -197,7 +209,7 @@ public class OrderServiceImpl implements OrderService {
 
 		}
 		for(OrderedItem previouslyOrderedItem: previouslyOrderedItems) {
-			itemService.deleteItemsById(previouslyOrderedItem.getId());
+			itemService.deleteItemsById(previouslyOrderedItem.getId()); 
 		}
 		Order savedOrder = orderRepository.save(order);
 
