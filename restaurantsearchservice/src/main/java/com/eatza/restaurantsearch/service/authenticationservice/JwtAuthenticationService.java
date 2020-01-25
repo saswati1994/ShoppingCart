@@ -1,4 +1,4 @@
-package com.eatza.restaurantsearch.service.authenticationservice;
+/*package com.eatza.restaurantsearch.service.authenticationservice;
 
 import java.util.Date;
 
@@ -45,3 +45,4 @@ public class JwtAuthenticationService {
 	}
 
 }
+*/

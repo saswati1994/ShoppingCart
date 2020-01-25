@@ -36,7 +36,7 @@ public class RestaurantController {
 	private static final String RESTAURANT_NOT_FOUND_MSG="No Restaurants found for specified inputs";
 
 	@GetMapping("/restaurants")
-	public ResponseEntity<RestaurantResponseDto> getAllRestaurants(@RequestHeader String authorization,@RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
+	public ResponseEntity<RestaurantResponseDto> getAllRestaurants(@RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
 		logger.debug("In getall restaurants method");
 		if(pagenumber<=0 || pagesize<=0) {
 			logger.debug("Page number or size cannot be zero or less, throwing exception");
@@ -58,7 +58,7 @@ public class RestaurantController {
 	}
 
 	@PostMapping("/restaurant")
-	public ResponseEntity<String> addRestaurant(@RequestHeader String authorization,@RequestBody RestaurantRequestDto restaurantDto){
+	public ResponseEntity<String> addRestaurant(@RequestBody RestaurantRequestDto restaurantDto){
 		
 		logger.debug("In add restaurants method, calling service");
 

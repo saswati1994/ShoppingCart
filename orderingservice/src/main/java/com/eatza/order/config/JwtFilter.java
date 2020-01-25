@@ -1,4 +1,4 @@
-package com.eatza.order.config;
+/*package com.eatza.order.config;
 
 
 import java.io.IOException;
@@ -57,3 +57,4 @@ public class JwtFilter extends GenericFilterBean {
 		}
 	}
 }
+*/

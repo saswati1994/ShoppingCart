@@ -1,4 +1,4 @@
-package com.eatza.orderingservice.service;
+/*package com.eatza.orderingservice.service;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -55,3 +55,4 @@ public class JwtAuthenticationServiceTest {
 	
 
 }
+*/

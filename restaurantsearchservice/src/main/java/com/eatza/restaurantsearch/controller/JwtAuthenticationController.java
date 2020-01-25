@@ -1,4 +1,4 @@
-package com.eatza.restaurantsearch.controller;
+/*package com.eatza.restaurantsearch.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,3 +37,4 @@ public class JwtAuthenticationController {
 	}
 
 }
+*/

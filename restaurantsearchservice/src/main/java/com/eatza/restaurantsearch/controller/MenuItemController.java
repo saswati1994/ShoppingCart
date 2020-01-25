@@ -32,7 +32,7 @@ public class MenuItemController {
 
 	
 	@PostMapping("/item")
-	public ResponseEntity<String> addItemsToRestaurantMenu(@RequestHeader String authorization,@RequestBody ItemRequestDto itemRequestDto){
+	public ResponseEntity<String> addItemsToRestaurantMenu(@RequestBody ItemRequestDto itemRequestDto){
 
 		logger.debug("In addItemsToRestaurantMenu method");
 		menuItemService.saveMenuItem(itemRequestDto);
@@ -44,7 +44,7 @@ public class MenuItemController {
 	}
 
 	@GetMapping("/restaurant/item/name/{name}")
-	public ResponseEntity<List<Restaurant>> getRestaurantsContainingItem(@RequestHeader String authorization,@PathVariable String name, @RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) throws  ItemNotFoundException{
+	public ResponseEntity<List<Restaurant>> getRestaurantsContainingItem(@PathVariable String name, @RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) throws  ItemNotFoundException{
 		logger.debug("In getRestaurantsContainingItem method, calling service");
 		return ResponseEntity
 				.status(HttpStatus.OK)

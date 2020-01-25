@@ -1,4 +1,4 @@
-package com.eatza.restaurantsearch.config;
+/*package com.eatza.restaurantsearch.config;
 
 
 import java.io.IOException;
@@ -56,3 +56,4 @@ public class JwtFilter extends GenericFilterBean {
 		}
 	}
 }
+*/
