@@ -211,7 +211,7 @@ public class OrderServiceImpl implements OrderService {
 		for(OrderedItem previouslyOrderedItem: previouslyOrderedItems) {
 			itemService.deleteItemsById(previouslyOrderedItem.getId()); 
 		}
-		Order savedOrder = orderRepository.save(order);
+		Order savedOrder = orderRepository.save(order); 
 
 		return new OrderUpdateResponseDto(savedOrder.getId(), savedOrder.getCustomerId(), savedOrder.getStatus(), savedOrder.getRestaurantId(),updateItemsListToReturn );
 

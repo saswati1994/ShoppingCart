@@ -19,12 +19,4 @@ public class OrderingserviceApplication {
 		System.out.println("OrderingserviceApplication started");
 	}
 	
-	  /*@Bean public FilterRegistrationBean jwtFilterBean() { final
-	  FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-	  registrationBean.setFilter(new JwtFilter());
-	  registrationBean.addUrlPatterns("/order/*");
-	  
-	  return registrationBean; }*/
-	 
-
 }

@@ -1,4 +1,4 @@
-package com.eatza.restaurantsearch.controller;
+ package com.eatza.restaurantsearch.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -62,7 +62,7 @@ public class MenuItemController {
 			return ResponseEntity
 					.status(HttpStatus.OK)
 					.body(item.get());
-		}
+		} 
 		else {
 			logger.debug("Item not found");
 			throw new ItemNotFoundException("No Item found for specified inputs");

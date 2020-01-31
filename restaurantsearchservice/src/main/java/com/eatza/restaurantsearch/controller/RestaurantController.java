@@ -35,7 +35,7 @@ public class RestaurantController {
 	private static final String RESTAURANT_BAD_REQUEST_MSG="Page number or Page size cannot be 0 or less";
 	private static final String RESTAURANT_NOT_FOUND_MSG="No Restaurants found for specified inputs";
 
-	@GetMapping("/restaurants")
+	@GetMapping("/restaurants") 
 	public ResponseEntity<RestaurantResponseDto> getAllRestaurants(@RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
 		logger.debug("In getall restaurants method");
 		if(pagenumber<=0 || pagesize<=0) {
@@ -64,7 +64,7 @@ public class RestaurantController {
 
 		restaurantService.saveRestaurant(restaurantDto);
 		logger.debug("Restaurant saved, returning back");
-
+ 
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body("Restaurant Added successfully");
@@ -74,7 +74,7 @@ public class RestaurantController {
 
 
 	@GetMapping("/restaurants/name/{name}")
-	public ResponseEntity<RestaurantResponseDto> getRestaurantsByName(@RequestHeader String authorization,@PathVariable String name,@RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
+	public ResponseEntity<RestaurantResponseDto> getRestaurantsByName(@PathVariable String name,@RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
 		logger.debug("In get restaurants by name method");
 		if(pagenumber<=0 || pagesize<=0) {
 			logger.debug("Page number or size cannot be zero or less, throwing exception");
@@ -94,7 +94,7 @@ public class RestaurantController {
 	}
 
 	@GetMapping("/restaurants/location/{location}/cuisine/{cuisine}")
-	public ResponseEntity<RestaurantResponseDto> getRestaurantsByLocationCuisine(@RequestHeader String authorization,@PathVariable String location, @PathVariable String cuisine, @RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
+	public ResponseEntity<RestaurantResponseDto> getRestaurantsByLocationCuisine(@PathVariable String location, @PathVariable String cuisine, @RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
 		logger.debug("In get restaurants by location and cuisine method");
 		if(pagenumber<=0 || pagesize<=0) {
 			logger.debug("Page number or size cannot be zero or less, throwing exception");
@@ -113,7 +113,7 @@ public class RestaurantController {
 	}
 
 	@GetMapping("/restaurants/name/{name}/location/{location}")
-	public ResponseEntity<RestaurantResponseDto> getRestaurantsByLocationName(@RequestHeader String authorization,@PathVariable String location, @PathVariable String name, @RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
+	public ResponseEntity<RestaurantResponseDto> getRestaurantsByLocationName(@PathVariable String location, @PathVariable String name, @RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
 		logger.debug("In get restaurants by location and cuisine method");
 
 		if(pagenumber<=0 || pagesize<=0) {
@@ -132,7 +132,7 @@ public class RestaurantController {
 	}
 
 	@GetMapping("/restaurants/budget/{budget}")
-	public ResponseEntity<RestaurantResponseDto> getRestaurantsByBudget(@RequestHeader String authorization,@PathVariable int budget ,@RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
+	public ResponseEntity<RestaurantResponseDto> getRestaurantsByBudget(@PathVariable int budget ,@RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
 		logger.debug("In get restaurants by budget method");
 
 		if(pagenumber<=0 || pagesize<=0) {
@@ -151,7 +151,7 @@ public class RestaurantController {
 	}
 
 	@GetMapping("/restaurants/rating/{rating}")
-	public ResponseEntity<RestaurantResponseDto> getRestaurantsByRating(@RequestHeader String authorization,@PathVariable double rating, @RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
+	public ResponseEntity<RestaurantResponseDto> getRestaurantsByRating(@PathVariable double rating, @RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
 		logger.debug("In get restaurants by rating method");
 
 		if(pagenumber<=0 || pagesize<=0) {
@@ -170,7 +170,7 @@ public class RestaurantController {
 	}
 	
 	@GetMapping("/restaurant/items/{restaurantid}")
-	public ResponseEntity<List<MenuItem>> getItemsByRestaurantId(@RequestHeader String authorization,@PathVariable Long restaurantid, @RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
+	public ResponseEntity<List<MenuItem>> getItemsByRestaurantId(@PathVariable Long restaurantid, @RequestParam(defaultValue="1") int pagenumber,@RequestParam(defaultValue="10") int pagesize) {
 
 		List<MenuItem> items = restaurantService.findMenuItemByRestaurantId(restaurantid, pagenumber, pagesize);
 		if(items.isEmpty()) {

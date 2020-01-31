@@ -18,6 +18,7 @@ import com.eatza.order.dto.OrderUpdateDto;
 import com.eatza.order.dto.OrderUpdateResponseDto;
 import com.eatza.order.exception.OrderException;
 import com.eatza.order.kafka.MessageSender;
+import com.eatza.order.model.Message;
 import com.eatza.order.model.Order;
 import com.eatza.order.service.orderservice.OrderService;
 
@@ -36,7 +37,7 @@ public class OrderController {
 	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 	
 	@PostMapping("/send")
-	public void send(@RequestBody String msg) {
+	public void send(@RequestBody Message msg) {
 		
 		messageSender.sendMessage(msg);
 	}

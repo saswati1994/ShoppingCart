@@ -34,7 +34,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Autowired
 	private MenuService menuService;
 
-	@Autowired 
+	@Autowired  
 	MenuItemService menuItemService;
 
 
@@ -52,7 +52,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return new RestaurantResponseDto(restaurantsToReturn, contentPage.getTotalPages(), contentPage.getTotalElements());
 		
 	}
-
+ 
 
 	@Override
 	public Restaurant saveRestaurant(RestaurantRequestDto restaurantDto) {

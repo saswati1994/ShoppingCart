@@ -29,7 +29,7 @@ public class Restaurant {
 		this.name = name;
 		this.location = location;
 		this.cuisine = cuisine;
-		this.budget = budget;
+		this.budget = budget; 
 		this.rating = rating;
 	}
 	
